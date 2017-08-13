@@ -11,7 +11,6 @@
   <% if !current_user.tags.empty? %>
     <br><p>Pick a tag or create a new tag:</p>
     <% current_user.tags.each do |tag| %>
-    <!-- <input type="checkbox" name="task[tag_id]" value="<%=tag.id%>" > <%= tag.title.capitalize %></input><br> -->
     <input type="checkbox" name="task[tag_attributes][tag_id]" value="<%=tag.id%>" > <%= tag.title.capitalize %></input><br>
     <% end %>
   <% end %>

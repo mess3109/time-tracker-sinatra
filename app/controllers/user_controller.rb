@@ -10,13 +10,12 @@ class UserController < ApplicationController
     end
 
     post '/signup' do
-      #all fields required for signup
-      if params[:user][:name].empty? || params[:user][:username].empty? || params[:user][:password].empty?
-        flash[:message] = "Missing field"
-        redirect "/signup"
-      else
-        user = User.create(params[:user])
+      user = User.create(params[:user])
+      if user.save
         redirect "/login"
+      else
+        flash[:message] = "Required field missing"
+        redirect "/signup"
       end
     end
 
@@ -29,9 +28,9 @@ class UserController < ApplicationController
     end
 
     post '/login' do
-      @user = User.find_by(username: params[:username])
-      if @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
+      current_user = User.find_by(username: params[:username])
+      if current_user && current_user.authenticate(params[:password])
+        session[:user_id] = current_user.id
         redirect "/tasks"
       else
         flash[:message] = "Incorrect username or password"
