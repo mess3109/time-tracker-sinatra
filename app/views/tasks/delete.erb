@@ -1,0 +1,8 @@
+<h3>Delete Task</h3>
+
+<form class="" action="/tasks/<%= @task.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+
+  <br>Task Name: <%= @task.title %> <br>
+  <br><input type="submit" name="" value="Delete Task">
+</form>

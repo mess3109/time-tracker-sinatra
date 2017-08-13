@@ -1,0 +1,29 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h3>Create New Task</h3>
+
+<form class="" action="/tasks" method="post">
+
+  <br>Task Name:
+  <br><input type="text" name="task[title]" placeholder="i.e. Clean room"></br>
+  <% if !current_user.tags.empty? %>
+    <br><p>Pick a tag or create a new tag:</p>
+    <% current_user.tags.each do |tag| %>
+    <!-- <input type="checkbox" name="task[tag_id]" value="<%=tag.id%>" > <%= tag.title.capitalize %></input><br> -->
+    <input type="checkbox" name="task[tag_attributes][tag_id]" value="<%=tag.id%>" > <%= tag.title.capitalize %></input><br>
+    <% end %>
+  <% end %>
+  <br>New tag:
+  <br><input type="text" name="task[tag_attributes][title]" placeholder="i.e. Home">
+
+  <br></br>
+
+  <p><label for="">What is your goal time for this task?</label>
+  <input type="text" name="task[goal_time]" value="" placeholder="hh:mm"></p>
+  <p><label for="">What is the actual time for this task?</label>
+  <input type="text" name="task[actual_time]" value="" placeholder="hh:mm"></p>
+  <p><textarea name="task[notes]" value="Notes" placeholder="Comments"></textarea></p>
+  <p><input type="submit" name="" value="Create New Task"></p>
+</form>

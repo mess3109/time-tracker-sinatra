@@ -1,0 +1,14 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h3><%=@user.name%>'s Tasks</h3>
+<% @user.tags.each do |tag|%>
+  <% if !tag.tasks.empty? %>
+    <h4><%=tag.title.capitalize%></h4>
+    <% tag.tasks.each do |task|%>
+      <li><a href="/tasks/<%= task.id %>"><%=task.title.capitalize%></a></li>
+    <% end %>
+    <p>
+  <% end %>
+<% end %>

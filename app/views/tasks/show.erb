@@ -1,0 +1,15 @@
+  <h4><%= @task.tag.title.capitalize %> Task: <%= @task.title.capitalize %></h4>
+  <br>Goal Time:
+  <%= @task.goal_time.hour %>h <%= task.goal_time.min %>m
+  <br>Actual Time: <% if @task.actual_time %>
+    <%= @task.actual_time.hour%>h <%= @task.actual_time.min %>m
+  <% else %>
+    Edit task to fill in actual time
+  <% end %>
+  <br><% if !@task.notes.empty? %>
+  Notes:
+  <%= @task.notes %></br>
+  <% end %>
+  <br>
+  <p><a href="/tasks/<%=@task.id%>/edit">Edit Task</a>
+  <a href="/tasks/<%=@task.id%>/delete">Delete Task</a></p>

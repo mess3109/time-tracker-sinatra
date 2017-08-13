@@ -1,0 +1,33 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h3>Edit Task</h3>
+
+<form class="" action="/tasks/<%= @task.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <br>Task Name:
+  <br><input type="text" name="task[title]" value="<%= @task.title %>"></br>
+  <% if !current_user.tags.empty? %>
+    <br><p>Pick a tag or create a new tag:</p>
+    <% current_user.tags.each do |tag| %>
+    <input type="checkbox" name="task[tag_attributes][tag_id]" value="<%= tag.id %>" <%='checked' if tag.title == @task.tag.title %> > <%= tag.title.capitalize %></input><br>
+    <% end %>
+  <% end %>
+  <br>New tag:
+  <br><input type="text" name="task[tag_attributes][title]" >
+
+  <br></br>
+
+  <p><label for="">What is your goal time for this task? (hh:mm)</label>
+  <input type="text" name="task[goal_time]" value="<%= @task.goal_time.hour %>:<%= @task.goal_time.min %>"></p>
+  <p><label for="">What is the actual time for this task? (hh:mm)</label>
+  <% if @task.actual_time %>
+    <input type="text" name="task[actual_time]" value="<%= @task.actual_time.hour %>:<%= @task.actual_time.min %>"></p>
+  <% else %>
+    <input type="text" name="task[actual_time]" value=""></p>
+  <% end %>
+  <p><textarea name="task[notes]" value="" ><%= @task.notes %></textarea></p>
+  <p><input type="submit" name="" value="Edit Task"></p>
+</form>
