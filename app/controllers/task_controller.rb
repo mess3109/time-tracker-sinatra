@@ -69,7 +69,7 @@ class TaskController < ApplicationController
       redirect "/tasks"
     else
       flash[:message] = "Required field missing"
-      redirect "/tasks/new"
+      redirect "/tasks/edit"
     end
   end
 

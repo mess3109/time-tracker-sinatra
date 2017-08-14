@@ -4,7 +4,7 @@ class Task < ActiveRecord::Base
 
   validates :title, presence: true, length: { minimum: 2 }
   validates :goal_time, presence: true
-  validates :tag, presence: true
+  validates :tag_id, presence: true
 
   def tag_attributes=(tag)
     if tag[:tag_id].nil?
