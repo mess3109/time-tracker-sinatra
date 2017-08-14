@@ -35,9 +35,10 @@ class TaskController < ApplicationController
   get '/tasks/:id' do
     if logged_in?
       @task = Task.find_by_id(params[:id])
-      if @task.user = current_user
+      if @task.user == current_user
         erb :'/tasks/show'
       else
+        flash[:message] = "You cannot view that task."
         redirect "/tasks"
       end
     else
